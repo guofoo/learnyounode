@@ -15,6 +15,9 @@ function httpGet (index) {
         return console.error(err)
 
       // enter your code below
+      results[index] = data.toString()
+      count++
+
 
       if (count == 3)
         printResults()
