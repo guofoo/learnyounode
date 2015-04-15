@@ -7,6 +7,7 @@ http.get(process.argv[2], function (response) {
 
     if (err)
       return console.error(err)
+      
     data = data.toString()
     console.log(data.length)
     console.log(data)
