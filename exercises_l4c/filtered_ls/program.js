@@ -1,10 +1,9 @@
 var fs = require('fs')
 var path = require('path')
 
-// enter your code below
-
+fs.readdir(process.argv[2], function (err, list) {
   list.forEach(function (file) {
-// enter your code below
+    if (path.extname(file) === '.' + process.argv[3])
 
       console.log(file)
   })
