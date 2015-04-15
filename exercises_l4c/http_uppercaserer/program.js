@@ -16,4 +16,4 @@ server.listen(Number(process.argv[2]))
 // exit if no response after 2 seconds
 setTimeout(function() {
   process.exit();
-}, 1000);
+}, 2000);
