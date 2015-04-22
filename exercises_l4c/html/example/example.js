@@ -36,8 +36,7 @@
     setTimeout(function () {
         $scope.$broadcast('terminal-output', {
             output: true,
-            text: ['Welcome to vtortola.GitHub.io',
-                   'This is an example of ng-terminal-emulator.',
+            text: ['Welcome to live4code.com',
                    '',
                    "Please type 'help' to open a list of commands"],
             breakLine: true
