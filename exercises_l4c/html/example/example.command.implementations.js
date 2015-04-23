@@ -1,6 +1,26 @@
-﻿angular.module('ng-terminal-example.command.implementations', ['ng-terminal-example.command.tools'])
+﻿angular.module('ng-terminal-example.command.implementations', ['ng-terminal-example.command.tools'] )
 
-.config(['commandBrokerProvider', function (commandBrokerProvider) {
+.config(['commandBrokerProvider',
+ function (commandBrokerProvider) {
+
+    commandBrokerProvider.appendCommandHandler({
+        command: 'node',
+        description: ['run node command'],
+        handle: function (session) {
+            var a = Array.prototype.slice.call(arguments, 1);
+            session.output.push({ output: true, text: [a.join(' ')], breakLine: true });
+var initInjector = angular.injector(['ng']);
+var $http = initInjector.get('$http');
+
+$http.post('/api/run')
+    .success(function(data, status, headers, config) {
+        console.log('result');
+    })
+    .error(function(data, status, headers, config) {
+        console.log('result 2');
+    });
+        }
+    });
 
     commandBrokerProvider.appendCommandHandler({
         command: 'version',
