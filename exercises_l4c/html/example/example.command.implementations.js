@@ -8,7 +8,6 @@
         description: ['run node command'],
         handle: function (session) {
             var a = Array.prototype.slice.call(arguments, 1);
-            session.output.push({ output: true, text: [a.join(' ')], breakLine: true });
 
         console.log('iargs ' + arguments);
         console.log('a' + a);
@@ -24,11 +23,14 @@ $http.post('http://api-server.69d0a09b1a8b.ip-10-10-1-109.sfo3.live4code.com/api
     })
     .success(function(data, status, headers, config) {
         console.log('status ' + status);
-        console.log('data ' + data);
+        console.log('data ' + JSON.stringify(data));
+            session.output.push({ output: true, text: [data.message], breakLine: true });
     })
     .error(function(data, status, headers, config) {
         console.log('error ');
     });
+            //session.output.push({ output: true, text: [a.join(' ')], breakLine: true });
+            //session.output.push({ output: true, text: [data.message], breakLine: true });
         }
     });
 
