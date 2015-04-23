@@ -9,15 +9,25 @@
         handle: function (session) {
             var a = Array.prototype.slice.call(arguments, 1);
             session.output.push({ output: true, text: [a.join(' ')], breakLine: true });
+
+        console.log('iargs ' + arguments);
+        console.log('a' + a);
+
 var initInjector = angular.injector(['ng']);
 var $http = initInjector.get('$http');
 
-$http.post('/api/run')
+//$http.get('http://api-server.69d0a09b1a8b.ip-10-10-1-109.sfo3.live4code.com/api/ping')
+$http.post('http://api-server.69d0a09b1a8b.ip-10-10-1-109.sfo3.live4code.com/api/run',
+    { courseId: '55303e1aad6cf4332e819cbb',
+	userId: '5463dfd8296ea70a0086f4c5',
+    	cmd: a 
+    })
     .success(function(data, status, headers, config) {
-        console.log('result');
+        console.log('status ' + status);
+        console.log('data ' + data);
     })
     .error(function(data, status, headers, config) {
-        console.log('result 2');
+        console.log('error ');
     });
         }
     });
