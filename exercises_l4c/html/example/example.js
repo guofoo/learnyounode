@@ -13,16 +13,16 @@
     var provider = function () {
         var me = {};
 
-        me.$get = function () {
-            ga('send', 'pageview');
-            return function () {
-                return window.ga.apply(window, arguments);
-            }
-        };
+//        me.$get = function () {
+//            ga('send', 'pageview');
+//            return function () {
+//                return window.ga.apply(window, arguments);
+//            }
+//        };
 
-        me.ga = function () {
-            return window.ga.apply(window, arguments);
-        };
+//        me.ga = function () {
+//            return window.ga.apply(window, arguments);
+//        };
 
         return me;
     };
@@ -60,7 +60,7 @@
 
     $scope.$watchCollection(function () { return $scope.session.commands; }, function (n) {
         for (var i = 0; i < n.length; i++) {
-            $ga('send', 'event', 'Console', 'Command', JSON.stringify(n[i]));
+            //$ga('send', 'event', 'Console', 'Command', JSON.stringify(n[i]));
             $scope.$broadcast('terminal-command', n[i]);
         }
         $scope.session.commands.splice(0, $scope.session.commands.length);
@@ -69,7 +69,7 @@
 
     $scope.$watchCollection(function () { return $scope.session.output; }, function (n) {
         for (var i = 0; i < n.length; i++) {
-            $ga('send', 'event', 'Console', 'Output', JSON.stringify(n[i]));
+            //$ga('send', 'event', 'Console', 'Output', JSON.stringify(n[i]));
             $scope.$broadcast('terminal-output', n[i]);
         }
         $scope.session.output.splice(0, $scope.session.output.length);
@@ -77,13 +77,13 @@
     });
 
     $scope.$on('$viewContentLoaded', function (event) {
-        $ga('send', 'pageview');
+        //$ga('send', 'pageview');
     });
 
     $scope.$on('terminal-input', function (e, consoleInput) {
         var cmd = consoleInput[0];
 
-        $ga('send', 'event', 'Console', 'Input', cmd.command );
+        //$ga('send', 'event', 'Console', 'Input', cmd.command );
         try {
             if ($scope.session.context) {
                 $scope.session.context.execute($scope.session, cmd.command);
