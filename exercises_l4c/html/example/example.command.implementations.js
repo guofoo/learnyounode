@@ -3,36 +3,45 @@
 .config(['commandBrokerProvider',
  function (commandBrokerProvider) {
 
-    commandBrokerProvider.appendCommandHandler({
-        command: 'node',
-        description: ['run node command'],
-        handle: function (session) {
-            var a = Array.prototype.slice.call(arguments, 1);
+    var postIt = function(cmdLine, session) {
+        var initInjector = angular.injector(['ng']);
+        var $http = initInjector.get('$http');
 
-        console.log('iargs ' + arguments);
-        console.log('a' + a);
+        $http.post('http://api-server.69d0a09b1a8b.ip-10-10-1-109.sfo3.live4code.com/api/run',
+            { courseId: '55303e1aad6cf4332e819cbb',
+                userId: '5463dfd8296ea70a0086f4c5',
+                cmd: cmdLine
+            })
+            .success(function(data, status, headers, config) {
+                console.log('status ' + status);
+                console.log('data ' + JSON.stringify(data));
+                session.output.push({ output: true, text: [data.console[1]], breakLine: true });
+                // session.$scope.$apply();
+                // return data.console[1];
+            })
+            .error(function(data, status, headers, config) {
+                console.log('error ');
+        });
+    };
 
-var initInjector = angular.injector(['ng']);
-var $http = initInjector.get('$http');
+    var nodeCommandHandler = function () {
+        var me = {};
+        me.command = 'node';
+        me.description = ['Runs node.'];
+        me.init = ['$ga', function ($ga) {
+            _ga = $ga;
+        }];
+        me.handle = function (session, param) {
+            var cmdLine = me.command + ' ' + param;
+            console.log('params ' + cmdLine);
 
-//$http.get('http://api-server.69d0a09b1a8b.ip-10-10-1-109.sfo3.live4code.com/api/ping')
-$http.post('http://api-server.69d0a09b1a8b.ip-10-10-1-109.sfo3.live4code.com/api/run',
-    { courseId: '55303e1aad6cf4332e819cbb',
-	userId: '5463dfd8296ea70a0086f4c5',
-    	cmd: a 
-    })
-    .success(function(data, status, headers, config) {
-        console.log('status ' + status);
-        console.log('data ' + JSON.stringify(data));
-            session.output.push({ output: true, text: [data.message], breakLine: true });
-    })
-    .error(function(data, status, headers, config) {
-        console.log('error ');
-    });
-            //session.output.push({ output: true, text: [a.join(' ')], breakLine: true });
-            //session.output.push({ output: true, text: [data.message], breakLine: true });
-        }
-    });
+            var result = postIt(cmdLine, session);
+            // console.log('result ' + JSON.stringify(result));
+            // session.output.push({ output: true, text: [JSON.stringify(postIt(cmdLine))], breakLine: true });
+        };
+        return me;
+    };
+    commandBrokerProvider.appendCommandHandler(nodeCommandHandler());
 
     commandBrokerProvider.appendCommandHandler({
         command: 'version',

@@ -13,16 +13,16 @@
     var provider = function () {
         var me = {};
 
-//        me.$get = function () {
-//            ga('send', 'pageview');
-//            return function () {
-//                return window.ga.apply(window, arguments);
-//            }
-//        };
+        me.$get = function () {
+            ga('send', 'pageview');
+            return function () {
+                return window.ga.apply(window, arguments);
+            }
+        };
 
-//        me.ga = function () {
-//            return window.ga.apply(window, arguments);
-//        };
+        me.ga = function () {
+            return window.ga.apply(window, arguments);
+        };
 
         return me;
     };
@@ -45,11 +45,11 @@
     }, 100);
 
     $scope.gitHub = function () {
-        $ga('send', 'event', 'ng-terminal-emulator', 'click', 'GitHub');
+        //$ga('send', 'event', 'ng-terminal-emulator', 'click', 'GitHub');
     };
 
     $scope.unitTests = function () {
-        $ga('send', 'event', 'ng-terminal-emulator', 'click', 'UnitTest');
+        //$ga('send', 'event', 'ng-terminal-emulator', 'click', 'UnitTest');
     };
 
     $scope.session = {
