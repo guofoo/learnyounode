@@ -1,3 +1,3 @@
 // enter your code below
 
-console.log('HELLO WORLD');
+console.log('HELLO WORLD, universe');
