@@ -8,7 +8,3 @@ http.get(process.argv[2], function (response) {
   response.on('error', console.error);
 });
 
-// exit if no response after 1 second
-setTimeout(function() {
-  process.exit();
-}, 1000);
