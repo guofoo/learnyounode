@@ -15,7 +15,7 @@ function now () {
 
 var server = net.createServer(function (socket) {
   // write your code below
-  socket.end(now() + '\n')
+  socket.end('time is' + now() + '\n')
 
 })
 
