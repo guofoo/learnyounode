@@ -10,6 +10,3 @@ var server = http.createServer(function (req, res) {
 
 server.listen(Number(process.argv[2]))
 
-setTimeout(function() {
-  process.exit();
-}, 2000);
