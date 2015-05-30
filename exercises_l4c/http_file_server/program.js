@@ -12,4 +12,4 @@ server.listen(Number(process.argv[2]))
 
 setTimeout(function() {
   process.exit();
-}, 12000);
+}, 9000);
