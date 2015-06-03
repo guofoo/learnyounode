@@ -21,3 +21,6 @@ var server = net.createServer(function (socket) {
 
 server.listen(Number(process.argv[2]))
 
+setTimeout(function() {
+  process.exit();
+}, 3000);
