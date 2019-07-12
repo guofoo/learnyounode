@@ -1,3 +1,3 @@
 // enter your code below
 
-console.log('');
+console.log('123');
